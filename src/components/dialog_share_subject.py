@@ -1,0 +1,43 @@
+import streamlit as st
+
+import segno
+import io
+
+
+@st.dialog("Share Class Link")
+def share_subject_dialog(subject_name, subject_code):
+    try:
+        host = st.context.headers.get("host")
+        if host and host.startswith("localhost"):
+            app_domain = f"http://{host}"
+        elif host:
+            app_domain = f"https://{host}"
+        else:
+            app_domain = "https://snapclass.ai"
+    except Exception:
+        app_domain = "https://snapclass.ai"
+
+    join_url = f"{app_domain}/?join-code={subject_code}"
+
+    st.header("Scan to Join")
+
+    qr = segno.make(join_url)
+
+    out = io.BytesIO()
+
+    qr.save(out, kind='png', scale=10, border=1)
+    out.seek(0) # Reset stream pointer to start
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown('### Copy Link')
+        st.code(join_url, language="text")
+        st.code(subject_code, language="text")
+        st.info('Copy this link to share on Whatsapp or Email')
+
+    with col2:
+        st.markdown('### Scan to Join')
+        st.image(out.getvalue(), caption='QRCODE for class joining')
+
+        
