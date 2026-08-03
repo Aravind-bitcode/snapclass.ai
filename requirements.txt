@@ -2,8 +2,6 @@ streamlit
 numpy
 pandas
 scikit-learn
-dlib
-face_recognition_models
 supabase
 postgrest
 httpx
