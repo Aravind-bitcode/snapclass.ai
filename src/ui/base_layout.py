@@ -36,7 +36,6 @@ def style_base_layout():
     st.markdown("""
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
-            @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
                 
             /* Hide top toolbar */
             #MainMenu, footer, header {
@@ -79,7 +78,6 @@ def style_base_layout():
                 color: #F8FAFC !important;
                 border: 1px solid rgba(129, 140, 248, 0.3) !important;
                 border-radius: 1rem !important;
-                padding-right: 2.5rem !important;
             }
 
             /* Clean Password Eye Icon Toggle Styling */
@@ -90,20 +88,39 @@ def style_base_layout():
                 background: transparent !important;
                 border: none !important;
                 box-shadow: none !important;
-                padding: 4px 8px !important;
+                padding: 0 8px !important;
                 margin: 0 !important;
                 border-radius: 50% !important;
-                color: #94A3B8 !important;
+                color: transparent !important;
+                font-size: 0 !important;
                 min-height: auto !important;
                 width: auto !important;
-                font-family: 'Material Symbols Outlined', sans-serif !important;
+                position: relative !important;
+                cursor: pointer !important;
             }
 
-            div[data-baseweb="input"] button:hover {
-                background: rgba(255, 255, 255, 0.1) !important;
+            div[data-baseweb="input"] button *,
+            button[aria-label="Show password"] *,
+            button[aria-label="Hide password"] * {
+                display: none !important;
+            }
+
+            div[data-baseweb="input"] button::after,
+            button[aria-label="Show password"]::after,
+            button[aria-label="Hide password"]::after {
+                content: "👁️" !important;
+                font-size: 1.2rem !important;
                 color: #818CF8 !important;
-                transform: none !important;
-                box-shadow: none !important;
+                display: inline-block !important;
+                line-height: 1 !important;
+                transition: transform 0.2s ease !important;
+            }
+
+            div[data-baseweb="input"] button:hover::after,
+            button[aria-label="Show password"]:hover::after,
+            button[aria-label="Hide password"]:hover::after {
+                color: #C084FC !important;
+                transform: scale(1.15) !important;
             }
 
             /* Streamlit Top-Level Action Buttons Only */
