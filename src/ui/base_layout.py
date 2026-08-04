@@ -93,6 +93,19 @@ def style_base_layout():
                 transform: scale(1.03) !important;
             }
 
+            /* Password input visibility toggle button override */
+            div[data-baseweb="input"] button {
+                background-color: transparent !important;
+                border: none !important;
+                padding: 4px 8px !important;
+                border-radius: 6px !important;
+                font-size: 0.75rem !important;
+            }
+            div[data-baseweb="input"] button:hover {
+                transform: none !important;
+                background-color: rgba(255, 255, 255, 0.1) !important;
+            }
+
             /* Image centering */
             .stApp img {
                 display: block !important;
