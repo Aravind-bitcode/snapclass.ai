@@ -184,7 +184,7 @@ def teacher_tab_manage_subjects():
     teacher_id = st.session_state.teacher_data['teacher_id']
     col1, col2 = st.columns(2)
     with col1:
-        st.header('Manage Subjects', use_container_width=True)
+        st.header('Manage Subjects')
 
     with col2:
         if st.button('Create New Subject', use_container_width=True):
