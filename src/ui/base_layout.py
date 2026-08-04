@@ -36,6 +36,7 @@ def style_base_layout():
     st.markdown("""
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
                 
             /* Hide top toolbar */
             #MainMenu, footer, header {
@@ -78,10 +79,36 @@ def style_base_layout():
                 color: #F8FAFC !important;
                 border: 1px solid rgba(129, 140, 248, 0.3) !important;
                 border-radius: 1rem !important;
+                padding-right: 2.5rem !important;
             }
 
-            /* Streamlit Buttons */
-            button {
+            /* Clean Password Eye Icon Toggle Styling */
+            div[data-baseweb="input"] button,
+            button[aria-label="Show password"],
+            button[aria-label="Hide password"],
+            div[data-testid="stTextInput"] button {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 4px 8px !important;
+                margin: 0 !important;
+                border-radius: 50% !important;
+                color: #94A3B8 !important;
+                min-height: auto !important;
+                width: auto !important;
+                font-family: 'Material Symbols Outlined', sans-serif !important;
+            }
+
+            div[data-baseweb="input"] button:hover {
+                background: rgba(255, 255, 255, 0.1) !important;
+                color: #818CF8 !important;
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            /* Streamlit Top-Level Action Buttons Only */
+            .stButton > button,
+            div[data-testid="stFormSubmitButton"] > button {
                 border-radius: 1.2rem !important;
                 background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
                 color: #FFFFFF !important;
@@ -92,7 +119,8 @@ def style_base_layout():
                 transition: all 0.25s ease-in-out !important;
             }
 
-            button[kind="secondary"] {
+            .stButton > button[kind="secondary"],
+            div[data-testid="stFormSubmitButton"] > button[kind="secondary"] {
                 border-radius: 1.2rem !important;
                 background: linear-gradient(135deg, #EC4899 0%, #D946EF 100%) !important;
                 color: #FFFFFF !important;
@@ -101,7 +129,8 @@ def style_base_layout():
                 box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35) !important;
             }
 
-            button[kind="tertiary"] {
+            .stButton > button[kind="tertiary"],
+            div[data-testid="stFormSubmitButton"] > button[kind="tertiary"] {
                 border-radius: 1.2rem !important;
                 background: rgba(30, 41, 59, 0.9) !important;
                 color: #E2E8F0 !important;
@@ -109,7 +138,8 @@ def style_base_layout():
                 border: 1px solid rgba(255, 255, 255, 0.15) !important;
             }
 
-            button:hover {
+            .stButton > button:hover,
+            div[data-testid="stFormSubmitButton"] > button:hover {
                 transform: translateY(-2px) scale(1.02) !important;
                 box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5) !important;
             }
