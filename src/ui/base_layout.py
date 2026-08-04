@@ -14,6 +14,7 @@ def style_background_home():
                 box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
                 padding: 2.5rem !important;
                 border-radius: 2.5rem !important;
+                text-align: center !important;
             }
         </style>
         """, unsafe_allow_html=True)
@@ -32,8 +33,7 @@ def style_background_dashboard():
 def style_base_layout():
     st.markdown("""
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@1979&display=swap');
-            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Outfit:wght@400;500;600;700&display=swap');
                 
             /* Hide top toolbar */
             #MainMenu, footer, header {
@@ -41,59 +41,63 @@ def style_base_layout():
             }
                 
             .block-container {
-                padding-top: 1.5rem !important;    
+                padding-top: 2rem !important;    
+                max-width: 1000px !important;
             }
 
             h1 {
-                font-family: "Climate Crisis", sans-serif !important;
-                font-size: 3.5rem !important; 
+                font-family: 'Plus Jakarta Sans', sans-serif !important;
+                font-weight: 900 !important;
+                font-size: 3.2rem !important; 
                 line-height: 1.1 !important;
                 color: #F8FAFC !important;
-                margin-bottom: 0rem !important;
+                letter-spacing: -0.02em !important;
+                margin-bottom: 0.5rem !important;
             }
 
             h2 {
-                font-family: "Outfit", sans-serif !important;
+                font-family: 'Outfit', sans-serif !important;
                 font-weight: 700 !important;
-                font-size: 2rem !important; 
+                font-size: 1.8rem !important; 
                 line-height: 1.2 !important;
                 color: #F8FAFC !important;
                 margin-bottom: 0.5rem !important;
             }   
             h3, h4, p, label, span {
-                font-family: "Outfit", sans-serif !important;   
+                font-family: 'Outfit', sans-serif !important;   
                 color: #F1F5F9 !important;
             }
 
-            button {
-                border-radius: 1.5rem !important;
+            .stButton > button {
+                border-radius: 1.25rem !important;
                 background-color: #6366F1 !important;
-                color: white !important;
-                padding: 10px 20px !important;
+                color: #FFFFFF !important;
+                font-weight: 600 !important;
+                font-size: 1rem !important;
+                padding: 0.6rem 1.2rem !important;
                 border: none !important;
-                transition: transform 0.25s ease-in-out !important;
+                transition: transform 0.2s ease-in-out !important;
             }
 
-            button[kind="secondary"] {
-                border-radius: 1.5rem !important;
+            .stButton > button[kind="secondary"] {
                 background-color: #EC4899 !important;
-                color: white !important;
-                padding: 10px 20px !important;
-                border: none !important;
-                transition: transform 0.25s ease-in-out !important;
+                color: #FFFFFF !important;
             }
 
-            button[kind="tertiary"] {
-                border-radius: 1.5rem !important;
+            .stButton > button[kind="tertiary"] {
                 background-color: #334155 !important;
-                color: white !important;
-                padding: 10px 20px !important;
-                border: none !important;
-                transition: transform 0.25s ease-in-out !important;
+                color: #FFFFFF !important;
             }
 
-            button:hover {
-                transform: scale(1.05);
+            .stButton > button:hover {
+                transform: scale(1.03) !important;
+            }
+
+            /* Image centering */
+            .stApp img {
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
             }
         </style>
         """, unsafe_allow_html=True)
