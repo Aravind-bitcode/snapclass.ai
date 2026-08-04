@@ -4,8 +4,18 @@ from src.components.header import header_dashboard
 from src.components.footer import footer_dashboard
 from PIL import Image
 import numpy as np
-from src.pipelines.face_pipeline import predict_attendance, get_face_embeddings, train_classifier
-from src.pipelines.voice_pipeline import get_voice_embedding
+try:
+    from src.pipelines.face_pipeline import predict_attendance, get_face_embeddings, train_classifier
+except Exception:
+    def predict_attendance(img): return {}, [], 0
+    def get_face_embeddings(img): return []
+    def train_classifier(): return False
+
+try:
+    from src.pipelines.voice_pipeline import get_voice_embedding
+except Exception:
+    def get_voice_embedding(audio_bytes): return None
+
 from src.database.db import get_all_students, create_student, get_student_subjects, get_student_attendance, unenroll_student_to_subject, student_login_by_name
 import time
 
