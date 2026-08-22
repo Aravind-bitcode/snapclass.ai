@@ -61,6 +61,18 @@ def init_sqlite_db():
             )
         ''')
         
+        # Pre-seed demo teacher
+        cursor.execute("SELECT COUNT(*) FROM teachers")
+        if cursor.fetchone()[0] == 0:
+            cursor.execute("INSERT INTO teachers (teacher_id, username, password, name) VALUES (1, 'aravind', '$2b$12$eImiTXuWVxfM37uY4JANj.1Q2.f7Vw3F3V5.F1Vw3F3V5.F1Vw3F3', 'Prof. Aravind Johindkumar')")
+
+        # Pre-seed demo subjects
+        cursor.execute("SELECT COUNT(*) FROM subjects")
+        if cursor.fetchone()[0] == 0:
+            cursor.execute("INSERT INTO subjects (subject_id, subject_code, name, section, teacher_id) VALUES (1, 'CS101', 'Applied AI & Machine Learning', 'Section A', 1)")
+            cursor.execute("INSERT INTO subjects (subject_id, subject_code, name, section, teacher_id) VALUES (2, 'AI202', 'Biometric Computer Vision', 'Section B', 1)")
+            cursor.execute("INSERT INTO subjects (subject_id, subject_code, name, section, teacher_id) VALUES (3, 'DS301', 'Neural Networks & Deep Learning', 'Section A', 1)")
+
         conn.commit()
         conn.close()
     except Exception as e:
@@ -190,29 +202,44 @@ def get_all_students():
 
 def create_student(new_name, face_embedding=None, voice_embedding=None):
     data = {'name': new_name, 'face_embedding': face_embedding, "voice_embedding": voice_embedding}
+    res_student = None
     try:
         if supabase:
             response = supabase.table('students').insert(data).execute()
             if response and response.data:
-                return response.data
+                res_student = response.data
     except Exception as e:
         print(f"create_student Supabase notice: {e}")
 
     # Fallback SQLite
-    try:
-        conn = get_sqlite_conn()
-        c = conn.cursor()
-        face_json = json.dumps(face_embedding) if face_embedding else None
-        voice_json = json.dumps(voice_embedding) if voice_embedding else None
-        c.execute("INSERT INTO students (name, face_embedding, voice_embedding) VALUES (?, ?, ?)",
-                  (new_name, face_json, voice_json))
-        conn.commit()
-        s_id = c.lastrowid
-        conn.close()
-        return [{"student_id": s_id, "name": new_name, "face_embedding": face_embedding, "voice_embedding": voice_embedding}]
-    except Exception as e:
-        print(f"create_student SQLite notice: {e}")
-        return [{"student_id": random.randint(1000, 9999), "name": new_name, "face_embedding": face_embedding, "voice_embedding": voice_embedding}]
+    if not res_student:
+        try:
+            conn = get_sqlite_conn()
+            c = conn.cursor()
+            face_json = json.dumps(face_embedding) if face_embedding else None
+            voice_json = json.dumps(voice_embedding) if voice_embedding else None
+            c.execute("INSERT INTO students (name, face_embedding, voice_embedding) VALUES (?, ?, ?)",
+                      (new_name, face_json, voice_json))
+            conn.commit()
+            s_id = c.lastrowid
+            
+            c.execute("INSERT OR IGNORE INTO subject_students (student_id, subject_id) VALUES (?, 1)", (s_id,))
+            c.execute("INSERT OR IGNORE INTO subject_students (student_id, subject_id) VALUES (?, 2)", (s_id,))
+            conn.commit()
+            conn.close()
+            res_student = [{"student_id": s_id, "name": new_name, "face_embedding": face_embedding, "voice_embedding": voice_embedding}]
+        except Exception as e:
+            print(f"create_student SQLite notice: {e}")
+            res_student = [{"student_id": random.randint(1000, 9999), "name": new_name, "face_embedding": face_embedding, "voice_embedding": voice_embedding}]
+
+    # Auto-enroll student into default demo subjects
+    if res_student and len(res_student) > 0:
+        sid = res_student[0].get('student_id')
+        if sid:
+            enroll_student_to_subject(sid, 1)
+            enroll_student_to_subject(sid, 2)
+
+    return res_student
 
 def create_subject(subject_code, name, section, teacher_id):
     data = {"subject_code": subject_code, "name": name, "section": section, "teacher_id": teacher_id}
@@ -476,4 +503,26 @@ def student_login_by_name(name):
                     return s
     except Exception as e:
         print(f"student_login_by_name notice: {e}")
+    return None
+
+def get_subject_by_code(subject_code):
+    try:
+        if supabase:
+            res = supabase.table('subjects').select('subject_id, name, subject_code').eq('subject_code', subject_code).execute()
+            if res and res.data:
+                return res.data[0]
+    except Exception as e:
+        print(f"get_subject_by_code Supabase notice: {e}")
+
+    # Fallback SQLite
+    try:
+        conn = get_sqlite_conn()
+        c = conn.cursor()
+        c.execute("SELECT subject_id, name, subject_code FROM subjects WHERE UPPER(subject_code) = UPPER(?)", (subject_code.strip(),))
+        row = c.fetchone()
+        conn.close()
+        if row:
+            return dict(row)
+    except Exception as e:
+        print(f"get_subject_by_code SQLite notice: {e}")
     return None
