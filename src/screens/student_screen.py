@@ -42,7 +42,7 @@ def student_dashboard():
     with c1:
         st.header('Your Enrolled Subjects')
     with c2:
-        if st.button('Enroll in Subject', type='primary', width='stretch'):
+        if st.button('➕ Enroll in Subject', type='primary', use_container_width=True):
             enroll_dialog()
 
     st.divider()
@@ -69,7 +69,7 @@ def student_dashboard():
         
         def make_unenroll_button(s_id, s_name):
             def unenroll_button():
-                if st.button("Unenroll from this course", key=f"unenroll_{s_id}", type='tertiary', use_container_width=True, icon=':material/delete_forever:'):
+                if st.button("🗑️ Unenroll from course", key=f"unenroll_{s_id}", type='tertiary', use_container_width=True):
                     unenroll_student_to_subject(student_id, s_id)
                     st.toast(f'Unenrolled from {s_name} successfully!')
                     st.rerun()
@@ -166,7 +166,7 @@ def student_screen():
             except Exception:
                 st.error('Audio Data failed!')
 
-            if st.button('Create Account', type='primary', key="create_student_account_btn"):
+            if st.button('✨ Create Account', type='primary', key="create_student_account_btn"):
                 if new_name:
                     if photo_source:
                         with st.spinner('Creating profile..'):

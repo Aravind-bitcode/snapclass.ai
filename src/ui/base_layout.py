@@ -10,12 +10,12 @@ def style_background_home():
             }
             
             .stApp div[data-testid="stColumn"] {
-                background: rgba(30, 41, 59, 0.75) !important;
-                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                background: rgba(30, 41, 59, 0.85) !important;
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
                 padding: 2.5rem !important;
                 border-radius: 2rem !important;
-                backdrop-filter: blur(16px) !important;
-                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35) !important;
+                backdrop-filter: blur(20px) !important;
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
             }
         </style>
     """, unsafe_allow_html=True)
@@ -67,7 +67,7 @@ def style_base_layout():
                 margin-bottom: 0.5rem !important;
             }   
             
-            h3, h4, p, label, span {
+            h3, h4, p, label {
                 font-family: 'Outfit', sans-serif !important;   
                 color: #E2E8F0 !important;
             }
@@ -129,11 +129,22 @@ def style_base_layout():
                 border-radius: 1.2rem !important;
                 background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
                 color: #FFFFFF !important;
-                padding: 10px 22px !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                font-weight: 600 !important;
-                box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35) !important;
+                padding: 12px 24px !important;
+                font-size: 1.05rem !important;
+                font-family: 'Plus Jakarta Sans', sans-serif !important;
+                font-weight: 700 !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4) !important;
                 transition: all 0.25s ease-in-out !important;
+            }
+
+            .stButton > button p,
+            div[data-testid="stFormSubmitButton"] > button p {
+                color: #FFFFFF !important;
+                font-family: 'Plus Jakarta Sans', sans-serif !important;
+                font-weight: 700 !important;
+                font-size: 1.05rem !important;
+                margin: 0 !important;
             }
 
             .stButton > button[kind="secondary"],
@@ -141,24 +152,32 @@ def style_base_layout():
                 border-radius: 1.2rem !important;
                 background: linear-gradient(135deg, #EC4899 0%, #D946EF 100%) !important;
                 color: #FFFFFF !important;
-                padding: 10px 22px !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35) !important;
+                padding: 12px 24px !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4) !important;
+            }
+
+            .stButton > button[kind="secondary"] p {
+                color: #FFFFFF !important;
             }
 
             .stButton > button[kind="tertiary"],
             div[data-testid="stFormSubmitButton"] > button[kind="tertiary"] {
                 border-radius: 1.2rem !important;
-                background: rgba(30, 41, 59, 0.9) !important;
-                color: #E2E8F0 !important;
-                padding: 10px 22px !important;
-                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                background: rgba(30, 41, 59, 0.95) !important;
+                color: #F8FAFC !important;
+                padding: 12px 24px !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            }
+
+            .stButton > button[kind="tertiary"] p {
+                color: #F8FAFC !important;
             }
 
             .stButton > button:hover,
             div[data-testid="stFormSubmitButton"] > button:hover {
                 transform: translateY(-2px) scale(1.02) !important;
-                box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5) !important;
+                box-shadow: 0 6px 22px rgba(99, 102, 241, 0.55) !important;
             }
         </style>
     """, unsafe_allow_html=True)
