@@ -64,20 +64,28 @@ def student_dashboard():
             stats_map[sid]['attended'] += 1
 
     cols = st.columns(2)
+    seen_sids = set()
+    rendered_count = 0
     for i, sub_node in enumerate(subjects):
-        sub = sub_node['subjects']
-        sid = sub['subject_id']
+        sub = sub_node.get('subjects', {})
+        if not sub:
+            continue
+        sid = sub.get('subject_id')
+        if not sid or sid in seen_sids:
+            continue
+        seen_sids.add(sid)
+        
         stats = stats_map.get(sid, {"total": 0, "attended": 0})
         
-        def make_unenroll_button(s_id, s_name):
+        def make_unenroll_button(s_id, s_name, idx):
             def unenroll_button():
-                if st.button("🗑️ Unenroll from course", key=f"unenroll_{s_id}", type='tertiary', use_container_width=True):
+                if st.button("🗑️ Unenroll from course", key=f"unenroll_{s_id}_{idx}", type='tertiary', use_container_width=True):
                     unenroll_student_to_subject(student_id, s_id)
                     st.toast(f'Unenrolled from {s_name} successfully!')
                     st.rerun()
             return unenroll_button
 
-        with cols[i % 2]:
+        with cols[rendered_count % 2]:
             subject_card(
                 name=sub['name'],
                 code=sub['subject_code'],
@@ -86,8 +94,9 @@ def student_dashboard():
                     ('📅', 'Total', stats['total']),
                     ('✅', 'Attended', stats['attended']),
                 ],
-                footer_callback=make_unenroll_button(sid, sub['name'])
+                footer_callback=make_unenroll_button(sid, sub['name'], i)
             )
+        rendered_count += 1
     footer_dashboard()
 
 
