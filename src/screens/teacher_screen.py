@@ -42,14 +42,20 @@ def teacher_screen():
 
 def teacher_dashboard():
     teacher_data = st.session_state.teacher_data
-    c1, c2 = st.columns(2, vertical_alignment='center', gap='xxlarge')
+    c1, c2, c3 = st.columns([1.5, 2, 1], vertical_alignment='center')
     with c1:
         header_dashboard()
     with c2:
-        st.subheader(f"""Welcome, {teacher_data['name']} """)
-        if st.button("Logout", type='secondary', key='loginbackbtn', shortcut="control+backspace"):
+        st.markdown(f"""
+            <div style="text-align: right; font-size: 1.15rem; font-weight: 700; color: #F8FAFC; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                Welcome, <span style="background: linear-gradient(135deg, #818CF8, #C084FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{teacher_data['name']}</span> 👋
+            </div>
+        """, unsafe_allow_html=True)
+    with c3:
+        if st.button("Logout", type='secondary', key='teacher_logout_btn', use_container_width=True):
             st.session_state['is_logged_in'] = False
-            del st.session_state.teacher_data 
+            if 'teacher_data' in st.session_state:
+                del st.session_state.teacher_data 
             st.rerun()
 
     st.space()
