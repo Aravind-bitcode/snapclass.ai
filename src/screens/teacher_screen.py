@@ -270,11 +270,11 @@ def login_teacher(username, password):
 
 
 def teacher_screen_login():
-    c1, c2 = st.columns(2, vertical_alignment='center', gap="xxlarge")
+    c1, c2 = st.columns([1, 1], vertical_alignment='center')
     with c1:
         header_dashboard()
     with c2:
-        if st.button("Go back to Home", type='secondary', key="loginbackbtn", shortcut="control+backspace"):
+        if st.button("Go back to Home", type='secondary', key="loginbackbtn", shortcut="control+backspace", use_container_width=True):
             st.session_state['login_type'] = None
             st.rerun()
 
@@ -320,11 +320,11 @@ def register_teacher(teacher_username, teacher_name, teacher_pass, teacher_pass_
 
 
 def teacher_screen_register():
-    c1, c2 = st.columns(2, vertical_alignment='center', gap="xxlarge")
+    c1, c2 = st.columns([1, 1], vertical_alignment='center')
     with c1:
         header_dashboard()
     with c2:
-        if st.button("Go back to Home", type='secondary', key="loginbackbtn", shortcut="control+backspace"):
+        if st.button("Go back to Home", type='secondary', key="loginbackbtn", shortcut="control+backspace", use_container_width=True):
             st.session_state['login_type'] = None
             st.rerun()
 

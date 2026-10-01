@@ -109,26 +109,26 @@ def student_screen():
         student_dashboard()
         return
     
-    c1, c2 = st.columns(2, vertical_alignment='center', gap="xxlarge")
+    c1, c2 = st.columns([1, 1], vertical_alignment='center')
     with c1:
         header_dashboard()
     with c2:
-        if st.button("Go back to Home", type='secondary', key="loginbackbtn", shortcut="control+backspace"):
+        if st.button("Go back to Home", type='secondary', key="loginbackbtn", shortcut="control+backspace", use_container_width=True):
             st.session_state['login_type'] = None
             st.rerun()
 
-    st.header("Login using FaceID", text_alignment="center")
+    st.header("Login using FaceID")
 
     st.space()
     st.space()
 
     show_registration = st.session_state.get('show_student_registration', False)
 
-    # Allow direct registration toggle
-    reg_col1, reg_col2 = st.columns([3, 1])
+    # Allow direct registration toggle with equal column space
+    reg_col1, reg_col2 = st.columns([1, 1], vertical_alignment="center")
     with reg_col2:
         btn_label = "Hide Registration" if show_registration else "Register New Student"
-        if st.button(btn_label, type="tertiary", key="toggle_reg_btn"):
+        if st.button(btn_label, type="tertiary", key="toggle_reg_btn", use_container_width=True):
             st.session_state.show_student_registration = not show_registration
             st.rerun()
 

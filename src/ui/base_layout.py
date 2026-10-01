@@ -123,19 +123,24 @@ def style_base_layout():
                 transform: scale(1.15) !important;
             }
 
-            /* Streamlit Top-Level Action Buttons Only */
+            /* Streamlit Top-Level Action Buttons Only - No Truncation */
             .stButton > button,
             div[data-testid="stFormSubmitButton"] > button {
                 border-radius: 1.2rem !important;
                 background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
                 color: #FFFFFF !important;
-                padding: 12px 24px !important;
+                padding: 10px 18px !important;
                 font-size: 1.05rem !important;
                 font-family: 'Plus Jakarta Sans', sans-serif !important;
                 font-weight: 700 !important;
                 border: 1px solid rgba(255, 255, 255, 0.25) !important;
                 box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4) !important;
                 transition: all 0.25s ease-in-out !important;
+                white-space: nowrap !important;
+                word-break: keep-all !important;
+                text-overflow: clip !important;
+                overflow: visible !important;
+                max-width: 100% !important;
             }
 
             .stButton > button p,
@@ -145,6 +150,9 @@ def style_base_layout():
                 font-weight: 700 !important;
                 font-size: 1.05rem !important;
                 margin: 0 !important;
+                white-space: nowrap !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
             }
 
             .stButton > button[kind="secondary"],
@@ -152,7 +160,7 @@ def style_base_layout():
                 border-radius: 1.2rem !important;
                 background: linear-gradient(135deg, #EC4899 0%, #D946EF 100%) !important;
                 color: #FFFFFF !important;
-                padding: 12px 24px !important;
+                padding: 10px 18px !important;
                 border: 1px solid rgba(255, 255, 255, 0.25) !important;
                 box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4) !important;
             }
@@ -166,7 +174,7 @@ def style_base_layout():
                 border-radius: 1.2rem !important;
                 background: rgba(30, 41, 59, 0.95) !important;
                 color: #F8FAFC !important;
-                padding: 12px 24px !important;
+                padding: 10px 18px !important;
                 border: 1px solid rgba(255, 255, 255, 0.2) !important;
             }
 
