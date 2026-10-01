@@ -33,3 +33,16 @@ def header_dashboard():
             <h2 style="text-align:left; font-size: 2.2rem !important; margin: 0; background: linear-gradient(135deg, #818CF8 0%, #C084FC 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SNAP<br/>CLASS</h2>
         </div>
     """, unsafe_allow_html=True)
+
+
+def header_dashboard_welcome(user_name: str):
+    logo_url = get_logo_url()
+    st.markdown(f"""
+        <div style="display: flex; align-items: center; gap: 16px; margin-top: 10px; margin-bottom: 10px;">    
+            <img src="{logo_url}" style="height:60px; width:60px; border-radius: 14px; object-fit: cover; border: 2px solid rgba(129, 140, 248, 0.4); box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);" />
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.6rem; background: linear-gradient(135deg, #818CF8 0%, #C084FC 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1;">SNAP CLASS</span>
+                <span style="font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; color: #E2E8F0; margin-top: 4px; white-space: nowrap;">Welcome, <strong style="color: #C084FC;">{user_name}</strong> 👋</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)

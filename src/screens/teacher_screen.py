@@ -5,7 +5,7 @@ from datetime import datetime
 
 from src.ui.base_layout import style_background_dashboard, style_base_layout
 
-from src.components.header import header_dashboard
+from src.components.header import header_dashboard, header_dashboard_welcome
 from src.components.footer import footer_dashboard
 from src.components.subject_card import subject_card
 from src.database.db import check_teacher_exists, create_teacher, teacher_login, get_teacher_subjects, get_attendance_for_teacher
@@ -42,16 +42,10 @@ def teacher_screen():
 
 def teacher_dashboard():
     teacher_data = st.session_state.teacher_data
-    c1, c2, c3 = st.columns([1.5, 2, 1], vertical_alignment='center')
+    c1, c2 = st.columns([3, 1], vertical_alignment='center')
     with c1:
-        header_dashboard()
+        header_dashboard_welcome(teacher_data['name'])
     with c2:
-        st.markdown(f"""
-            <div style="text-align: right; font-size: 1.15rem; font-weight: 700; color: #F8FAFC; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                Welcome, <span style="background: linear-gradient(135deg, #818CF8, #C084FC); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{teacher_data['name']}</span> 👋
-            </div>
-        """, unsafe_allow_html=True)
-    with c3:
         if st.button("Logout", type='secondary', key='teacher_logout_btn', use_container_width=True):
             st.session_state['is_logged_in'] = False
             if 'teacher_data' in st.session_state:
