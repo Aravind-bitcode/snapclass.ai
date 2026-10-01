@@ -113,7 +113,7 @@ def student_screen():
     with c1:
         header_dashboard()
     with c2:
-        if st.button("Go back to Home", type='secondary', key="loginbackbtn", shortcut="control+backspace", use_container_width=True):
+        if st.button("🏠 Home", type='secondary', key="loginbackbtn", shortcut="control+backspace", use_container_width=True):
             st.session_state['login_type'] = None
             st.rerun()
 
@@ -124,10 +124,10 @@ def student_screen():
 
     show_registration = st.session_state.get('show_student_registration', False)
 
-    # Allow direct registration toggle with equal column space
+    # Allow direct registration toggle
     reg_col1, reg_col2 = st.columns([1, 1], vertical_alignment="center")
     with reg_col2:
-        btn_label = "Hide Registration" if show_registration else "Register New Student"
+        btn_label = "✖️ Hide Registration" if show_registration else "📝 Register Profile"
         if st.button(btn_label, type="tertiary", key="toggle_reg_btn", use_container_width=True):
             st.session_state.show_student_registration = not show_registration
             st.rerun()

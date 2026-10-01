@@ -43,14 +43,15 @@ def style_base_layout():
             }
                 
             .block-container {
-                padding-top: 2rem !important;    
-                padding-bottom: 2rem !important;
+                padding-top: 1.5rem !important;    
+                padding-bottom: 1.5rem !important;
+                max-width: 1200px !important;
             }
 
             h1 {
                 font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif !important;
                 font-weight: 800 !important;
-                font-size: 3rem !important; 
+                font-size: 2.8rem !important; 
                 line-height: 1.1 !important;
                 margin-bottom: 0rem !important;
                 background: linear-gradient(135deg, #818CF8 0%, #C084FC 100%);
@@ -61,7 +62,7 @@ def style_base_layout():
             h2 {
                 font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif !important;
                 font-weight: 700 !important;
-                font-size: 1.8rem !important; 
+                font-size: 1.7rem !important; 
                 line-height: 1.2 !important;
                 color: #F8FAFC !important;
                 margin-bottom: 0.5rem !important;
@@ -123,67 +124,63 @@ def style_base_layout():
                 transform: scale(1.15) !important;
             }
 
-            /* Streamlit Top-Level Action Buttons Only - No Truncation */
-            .stButton > button,
-            div[data-testid="stFormSubmitButton"] > button {
-                border-radius: 1.2rem !important;
+            /* Global Streamlit Button Styling - No Text Truncation */
+            div[data-testid="stButton"] button,
+            div[data-testid="stFormSubmitButton"] button,
+            .stButton > button {
+                border-radius: 1rem !important;
                 background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
                 color: #FFFFFF !important;
-                padding: 10px 18px !important;
-                font-size: 1.05rem !important;
+                padding: 8px 16px !important;
+                font-size: 0.95rem !important;
                 font-family: 'Plus Jakarta Sans', sans-serif !important;
                 font-weight: 700 !important;
                 border: 1px solid rgba(255, 255, 255, 0.25) !important;
                 box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4) !important;
-                transition: all 0.25s ease-in-out !important;
+                transition: all 0.2s ease-in-out !important;
                 white-space: nowrap !important;
                 word-break: keep-all !important;
-                text-overflow: clip !important;
                 overflow: visible !important;
-                max-width: 100% !important;
             }
 
+            /* Target internal paragraph/span text containers in Streamlit buttons */
+            div[data-testid="stButton"] button *,
+            div[data-testid="stFormSubmitButton"] button *,
+            .stButton > button *,
+            div[data-testid="stButton"] button p,
+            div[data-testid="stFormSubmitButton"] button p,
             .stButton > button p,
-            div[data-testid="stFormSubmitButton"] > button p {
+            div[data-testid="stMarkdownContainer"] p {
                 color: #FFFFFF !important;
                 font-family: 'Plus Jakarta Sans', sans-serif !important;
                 font-weight: 700 !important;
-                font-size: 1.05rem !important;
+                font-size: 0.95rem !important;
                 margin: 0 !important;
                 white-space: nowrap !important;
                 overflow: visible !important;
                 text-overflow: clip !important;
             }
 
-            .stButton > button[kind="secondary"],
-            div[data-testid="stFormSubmitButton"] > button[kind="secondary"] {
-                border-radius: 1.2rem !important;
+            div[data-testid="stButton"] button[kind="secondary"],
+            .stButton > button[kind="secondary"] {
                 background: linear-gradient(135deg, #EC4899 0%, #D946EF 100%) !important;
-                color: #FFFFFF !important;
-                padding: 10px 18px !important;
-                border: 1px solid rgba(255, 255, 255, 0.25) !important;
                 box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4) !important;
             }
 
-            .stButton > button[kind="secondary"] p {
-                color: #FFFFFF !important;
-            }
-
-            .stButton > button[kind="tertiary"],
-            div[data-testid="stFormSubmitButton"] > button[kind="tertiary"] {
-                border-radius: 1.2rem !important;
+            div[data-testid="stButton"] button[kind="tertiary"],
+            .stButton > button[kind="tertiary"] {
                 background: rgba(30, 41, 59, 0.95) !important;
                 color: #F8FAFC !important;
-                padding: 10px 18px !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
             }
 
-            .stButton > button[kind="tertiary"] p {
+            div[data-testid="stButton"] button[kind="tertiary"] *,
+            .stButton > button[kind="tertiary"] * {
                 color: #F8FAFC !important;
             }
 
-            .stButton > button:hover,
-            div[data-testid="stFormSubmitButton"] > button:hover {
+            div[data-testid="stButton"] button:hover,
+            .stButton > button:hover {
                 transform: translateY(-2px) scale(1.02) !important;
                 box-shadow: 0 6px 22px rgba(99, 102, 241, 0.55) !important;
             }
